@@ -39,6 +39,7 @@ defp decoder([a, b | t]) when is_integer(a) and is_integer(b) do
   {int, _} = Integer.parse(s)
   decoder([int | t])
 end
+
 defp decoder([a, b | tail]) when is_bitstring(a) and is_integer(b), do: [a | decoder([b | tail])]
 defp decoder([a, b | tail]) when is_integer(a), do: [String.duplicate(b, a) | decoder(tail)]
 defp decoder(list) when is_list(list), do: list
