@@ -8,16 +8,13 @@
 
 
 module HelloWorld exposing (..)
-import String exposing (concat)
 
 -- It's good style to include any types at the top level of your modules.
 
 
 helloWorld : Maybe String -> String
 helloWorld name =
-    case name of
-        Nothing -> "Hello, World!"
-        Just name -> String.concat ["Hello, ", name, "!"]
+    "Hello, " ++ (Maybe.withDefault "World" name) ++ "!"
 
 
 
