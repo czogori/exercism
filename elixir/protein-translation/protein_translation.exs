@@ -46,12 +46,12 @@ defmodule ProteinTranslation do
     cond do
       codon == "AUG" -> {:ok, "Methionine"}
       codon == "UGG" -> {:ok, "Tryptophan"}
-      Enum.member?(~w(UGU UGC), codon) -> {:ok, "Cysteine"}
-      Enum.member?(~w(UUA UUG), codon) -> {:ok, "Leucine"}
-      Enum.member?(~w(UUU UUC), codon) -> {:ok, "Phenylalanine"}
-      Enum.member?(~w(UCU UCC UCA UCG), codon) -> {:ok, "Serine"}
-      Enum.member?(~w(UAU UAC), codon) -> {:ok, "Tyrosine"}
-      Enum.member?(~w(UAA UAG UGA), codon) -> {:ok, "STOP"}
+      codon in ~w(UGU UGC) -> {:ok, "Cysteine"}
+      codon in ~w(UUA UUG) -> {:ok, "Leucine"}
+      codon in ~w(UUU UUC) -> {:ok, "Phenylalanine"}
+      codon in ~w(UCU UCC UCA UCG) -> {:ok, "Serine"}
+      codon in ~w(UAU UAC) -> {:ok, "Tyrosine"}
+      codon in ~w(UAA UAG UGA) -> {:ok, "STOP"}
       true -> {:error, "invalid codon"}
     end
   end
