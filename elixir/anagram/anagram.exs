@@ -4,7 +4,8 @@ defmodule Anagram do
   """
   @spec match(String.t, [String.t]) :: [String.t]
   def match(base, candidates) do
-    Enum.filter(candidates, fn(x) -> conv(x) == conv(base) && 
+    b = conv(base)
+    Enum.filter(candidates, fn(x) -> conv(x) == b && 
       String.downcase(x) != String.downcase(base) end)
   end
 
@@ -13,6 +14,5 @@ defmodule Anagram do
     |> String.downcase 
     |> String.codepoints 
     |> Enum.sort 
-    |> Enum.join
   end
 end
