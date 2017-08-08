@@ -43,12 +43,10 @@ defmodule Matrix do
   Given a `matrix`, return its columns as a list of lists of integers.
   """
   @spec columns(matrix :: %Matrix{}) :: list(list(integer))
-  def columns(matrix) do
-    _columns(matrix)
-  end
+  def columns(matrix), do: _columns(matrix)
   defp _columns([[]|_]), do: []
-  defp _columns(cells) do
-    [ Enum.map(cells, fn x -> hd(x) end) | _columns(Enum.map(cells, fn x -> tl(x) end))]
+  defp _columns(matrix) do
+    [Enum.map(matrix, fn x -> hd(x) end) | _columns(Enum.map(matrix, fn x -> tl(x) end))]
   end
 
 
