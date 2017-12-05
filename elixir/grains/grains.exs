@@ -17,7 +17,7 @@ defmodule Grains do
   @spec total :: pos_integer
   def total do
     sum = 1..64
-    |> Enum.map(&Grains.square(&1)) 
+    |> Enum.map(&Grains.square/1) 
     |> Enum.map(fn {:ok, x} -> x end) 
     |> Enum.sum
 
