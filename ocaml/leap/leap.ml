@@ -1,2 +1,3 @@
-let leap_year year = ((year mod 4 == 0) && (year mod 100) <> 0) || (year mod 400 == 0)
-
+let leap_year year =
+    let dividable num = year mod num == 0 in
+    dividable 4 && not (dividable 100) || dividable 400
