@@ -45,12 +45,12 @@ defmodule RobotSimulator do
   @spec position(robot :: any) :: {integer, integer}
   def position(robot), do: robot.position
 
-  def parser([], robot), do: robot
-  def parser([h|t], %{direction: direction} = robot) when h in ["L", "R"], do:
+  defp parser([], robot), do: robot
+  defp parser([h|t], %{direction: direction} = robot) when h in ["L", "R"], do:
     parser(t, %{robot | direction: transition_direction(direction, h)})
-  def parser([h|t], %{direction: direction, position: position} = robot) when h == "A", do:
+  defp parser([h|t], %{direction: direction, position: position} = robot) when h == "A", do:
     parser(t, %{robot | position: move(position, direction)})
-  def parser(_, _), do: {:error, "invalid instruction"}
+  defp parser(_, _), do: {:error, "invalid instruction"}
 
   defp transition_direction(:north, "L"), do: :west
   defp transition_direction(:north, "R"), do: :east
