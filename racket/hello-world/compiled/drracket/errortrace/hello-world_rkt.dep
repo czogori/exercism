@@ -1,1 +1,0 @@
-("7.3" racket ("03d422b4a184782ee53a33961a0902e5baac5787" . "1a7bb78032e6ab542c8a04e8b02453ce79d5fe0b") (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
