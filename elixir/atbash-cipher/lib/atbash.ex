@@ -31,14 +31,14 @@ defmodule Atbash do
     |> Enum.join()
   end
 
-  def map_letter(letter) do
+  defp map_letter(letter) do
     Enum.zip(@plain, @cipher)
     |> Enum.into(%{})
     |> Map.get(letter)
   end
 
-  def group(letters, count \\ 1)
-  def group([], _), do: []
-  def group([h|t], count) when rem(count, 5) == 0, do: [h <> " " | group(t, count + 1)]
-  def group([h|t], count), do: [h | group(t, count + 1)]
+  defp group(letters, count \\ 1)
+  defp group([], _), do: []
+  defp group([h|t], count) when rem(count, 5) == 0, do: [h <> " " | group(t, count + 1)]
+  defp group([h|t], count), do: [h | group(t, count + 1)]
 end
