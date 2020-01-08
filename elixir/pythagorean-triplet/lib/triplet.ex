@@ -20,7 +20,7 @@ defmodule Triplet do
   """
   @spec pythagorean?([non_neg_integer]) :: boolean
   def pythagorean?([a, b, c]) do
-    round(:math.pow(a, 2)) + round(:math.pow(b, 2)) == round(:math.pow(c, 2))
+    a * a + b * b == c * c
   end
 
   @doc """
@@ -28,7 +28,11 @@ defmodule Triplet do
   """
   @spec generate(non_neg_integer, non_neg_integer) :: [list(non_neg_integer)]
   def generate(min, max) do
-    items(min, max) |> Enum.filter(&pythagorean?/1)
+    for c <- min..max, b <- min..c, a <- min..b, pythagorean?([a,b,c]) do
+      [a,b,c]
+    end
+    |> Enum.uniq()
+    |> Enum.sort()
   end
 
   @doc """
@@ -37,18 +41,5 @@ defmodule Triplet do
   @spec generate(non_neg_integer, non_neg_integer, non_neg_integer) :: [list(non_neg_integer)]
   def generate(min, max, sum) do
     generate(min, max) |> Enum.filter(fn i -> sum(i) == sum end)
-  end
-
-  defp items(min, max) do
-    for a <- min..max do
-      for b <- min..max do
-        for c <- min..max do
-          [a, b, c] |> Enum.sort()
-        end
-      end
-    end
-    |> Enum.flat_map(& &1)
-    |> Enum.flat_map(& &1)
-    |> Enum.uniq()
   end
 end
