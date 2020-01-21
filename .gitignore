@@ -1,8 +1,11 @@
 _build/
 .build/
 node_modules/
+bower_components/
 bin/
 obj/
+output/
 .vs/
 compiled/
 .stack-work/
+
