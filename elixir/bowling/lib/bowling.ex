@@ -5,10 +5,12 @@ defmodule Bowling do
   """
 
   @max_point_in_frame 10
+  @max_frames 10
 
   defstruct [
     rolls: [],
-    frames: []
+    frames: [],
+    bonus_rolls: [],
   ]
 
   @spec start() :: any
@@ -26,25 +28,39 @@ defmodule Bowling do
   def roll(_game, roll) when roll > @max_point_in_frame, do:
     {:error, "Pin count exceeds pins on the lane"}
   def roll(%Bowling{rolls: rolls} = _game, roll) do
-    frames = make_frames(rolls ++ [roll])
-    last = List.last(frames)
-    frame10 = Enum.at(frames, 9)
+    {frames, bonus_rolls} = rolls ++ [roll]
+      |> make_frames()
+      |> extract_bonus_rolls()
+    last_frame = List.last(frames)
+    frames_count = Enum.count(frames)
+    bonus_rolls_count = Enum.count(bonus_rolls)
+
     cond do
-      length(frames) > 10 && Tuple.sum(frame10) < 10 ->
+      frames_count == @max_frames && !strike_or_spare?(last_frame) && bonus_rolls_count > 0 ->
         {:error, "Cannot roll after game is over"}
-      tuple_size(last) == 2 && pin_count_exceeds?(last) ->
+      second_bonus_roll_cant_be_strrike?(bonus_rolls) ||
+      pin_count_exceeds?(last_frame) ->
         {:error, "Pin count exceeds pins on the lane"}
-      (Enum.count(frames) == 11 && spare?(frame10) && tuple_size(last) > 1) ||
-      (Enum.count(frames) == 12 && strike?(frame10) && Tuple.sum(Enum.at(frames, 10)) < 10) ->
+      (spare?(last_frame) && bonus_rolls_count > 1) ||
+      (strike?(last_frame) && bonus_rolls_count > 2) ->
           {:error, "Cannot roll after game is over"}
       true ->
-        {:ok, %Bowling{rolls: rolls ++ [roll], frames: frames}}
+        {:ok, %Bowling{
+          rolls: rolls ++ [roll],
+          frames: frames,
+          bonus_rolls: bonus_rolls
+          }
+        }
     end
+
   end
 
-  defp pin_count_exceeds?(rolls) when is_tuple(rolls) do
+  defp pin_count_exceeds?(rolls) when is_tuple(rolls), do:
     Tuple.sum(rolls) > @max_point_in_frame
-  end
+
+  defp second_bonus_roll_cant_be_strrike?([roll1, roll2]), do:
+    roll1 < @max_point_in_frame && roll1 + roll2 > @max_point_in_frame
+  defp second_bonus_roll_cant_be_strrike?(_), do: false
 
   @doc """
     Returns the score of a given game of bowling if the game is complete.
@@ -54,16 +70,15 @@ defmodule Bowling do
   @spec score(any) :: {:ok, integer} | {:error, String.t()}
   def score(%Bowling{frames: frames}) when length(frames) < 10, do:
     {:error, "Score cannot be taken until the end of the game"}
-  def score(%Bowling{rolls: rolls, frames: frames}) do
+  def score(%Bowling{rolls: rolls, frames: frames, bonus_rolls: bonus_rolls}) do
     last_frame = List.last(frames)
-    frame_count = Enum.count(frames)
 
     cond do
-      (frame_count == 10 && strike_or_spare?(last_frame)) ||
-      (frame_count == 11 && strike?(last_frame) && strike?(Enum.at(frames, 9))) ->
+      (spare?(last_frame) && Enum.count(bonus_rolls) < 1) ||
+      (strike?(last_frame) && Enum.count(bonus_rolls) < 2) ->
         {:error, "Score cannot be taken until the end of the game"}
       true ->
-        score = rolls |> calculate_score()
+        score = calculate_score(rolls)
         {:ok, score}
     end
   end
@@ -106,4 +121,10 @@ defmodule Bowling do
   defp make_frames([roll1, roll2 | t]),
     do: [{roll1, roll2}] ++ make_frames(t)
   defp make_frames([roll|t]), do: [{roll}] ++ make_frames(t)
+
+  defp extract_bonus_rolls(frames) do
+    {frames, bonus_rolls} = Enum.split(frames, @max_frames)
+
+    {frames, Enum.flat_map(bonus_rolls, &Tuple.to_list/1)}
+  end
 end
