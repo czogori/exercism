@@ -1,14 +1,5 @@
-import gleam/option.{Option, Some, None}
-import gleam/string.{append}
+import gleam/option.{Option, unwrap}
 
 pub fn two_fer(name: Option(String)) -> String {
-	case name {
-		Some(s) -> message(s)
-		None -> message("you")
-	}
-}
-fn message(name: String) {
-	"One for "
-	|> append(name) 
-	|> append(", one for me." <> "")
+  "One for " <> unwrap(name, "you") <> ", one for me."
 }
