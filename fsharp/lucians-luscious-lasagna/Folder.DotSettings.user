@@ -1,0 +1,13 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6ff9efc9_002De122_002D4a11_002Dac04_002D139816aae8f0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from LuciansLusciousLasagnaTests.fs #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;ProjectFile&gt;B68FBB59-41C1-EDD6-A2DC-7D8DAB1833C0/f:LuciansLusciousLasagnaTests.fs&lt;/ProjectFile&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8b910899_002D0464_002D496b_002D8b3b_002D9cee9d623ee7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from LuciansLusciousLasagnaTests.fs #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;ProjectFile&gt;B68FBB59-41C1-EDD6-A2DC-7D8DAB1833C0/f:LuciansLusciousLasagnaTests.fs&lt;/ProjectFile&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b6f02a49_002D42b8_002D43df_002D97ae_002D1f8b82de9272/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from LuciansLusciousLasagnaTests.fs #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;ProjectFile&gt;B68FBB59-41C1-EDD6-A2DC-7D8DAB1833C0/f:LuciansLusciousLasagnaTests.fs&lt;/ProjectFile&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f2e872e7_002D1e6b_002D4472_002D967c_002Db0e0ca5e585b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from LuciansLusciousLasagnaTests.fs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;ProjectFile&gt;B68FBB59-41C1-EDD6-A2DC-7D8DAB1833C0/f:LuciansLusciousLasagnaTests.fs&lt;/ProjectFile&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
